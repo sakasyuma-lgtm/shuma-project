@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>図形の証明 学習アプリ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📐 図形の証明 練習アプリ</h1>
+            <p class="subtitle">中学2年生 数学</p>
+        </header>
+
+        <main>
+            <section class="problem-section">
+                <div class="problem-header">
+                    <h2>問題</h2>
+                    <button id="newProblemBtn" class="btn btn-primary">新しい問題を生成</button>
+                </div>
+
+                <div class="problem-content">
+                    <div class="geometry-display">
+                        <svg id="geometrySvg" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                            <!-- 図形がここに描画されます -->
+                        </svg>
+                    </div>
+
+                    <div class="problem-description">
+                        <h3>条件</h3>
+                        <ul id="conditions" class="conditions-list">
+                            <!-- 条件がここに表示されます -->
+                        </ul>
+
+                        <h3>証明せよ</h3>
+                        <p id="goalStatement" class="goal-statement">
+                            <!-- 証明する内容がここに表示されます -->
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="proof-section">
+                <h2>証明</h2>
+                <div id="proofSteps" class="proof-steps">
+                    <!-- 証明のステップがここに追加されます -->
+                </div>
+
+                <div class="add-step-section">
+                    <select id="reasonType" class="form-select">
+                        <option value="">理由を選択...</option>
+                        <option value="given">仮定より</option>
+                        <option value="vertical">対頂角は等しい</option>
+                        <option value="common">共通な辺</option>
+                        <option value="parallel">平行線の錯角は等しい</option>
+                        <option value="parallel-alt">平行線の同位角は等しい</option>
+                        <option value="isosceles">二等辺三角形の底角は等しい</option>
+                        <option value="congruent-sas">2辺とその間の角が等しい（SAS）</option>
+                        <option value="congruent-asa">1辺とその両端の角が等しい（ASA）</option>
+                        <option value="congruent-sss">3辺が等しい（SSS）</option>
+                        <option value="cpctc">合同な図形の対応する辺（角）は等しい</option>
+                    </select>
+
+                    <input type="text" id="stepContent" class="form-input" placeholder="例: AB = CD">
+
+                    <button id="addStepBtn" class="btn btn-secondary">ステップを追加</button>
+                </div>
+
+                <div class="proof-actions">
+                    <button id="checkAnswerBtn" class="btn btn-success">答え合わせ</button>
+                    <button id="showHintBtn" class="btn btn-info">ヒント</button>
+                    <button id="showAnswerBtn" class="btn btn-warning">解答を表示</button>
+                    <button id="clearProofBtn" class="btn btn-danger">クリア</button>
+                </div>
+
+                <div id="feedback" class="feedback hidden">
+                    <!-- フィードバックがここに表示されます -->
+                </div>
+            </section>
+
+            <section class="answer-section hidden" id="answerSection">
+                <h2>模範解答</h2>
+                <div id="modelAnswer" class="model-answer">
+                    <!-- 模範解答がここに表示されます -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>図形の証明を練習しよう！問題はランダムに生成されます。</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
