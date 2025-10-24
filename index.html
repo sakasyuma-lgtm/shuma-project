@@ -13,79 +13,393 @@
             <p class="subtitle">中学2年生 数学</p>
         </header>
 
-        <main>
-            <section class="problem-section">
-                <div class="problem-header">
-                    <h2>問題</h2>
-                    <button id="newProblemBtn" class="btn btn-primary">新しい問題を生成</button>
-                </div>
+        <nav class="mode-nav">
+            <button id="tutorialModeBtn" class="nav-btn active">📖 解説モード</button>
+            <button id="practiceModeBtn" class="nav-btn">✏️ 練習モード</button>
+        </nav>
 
-                <div class="problem-content">
-                    <div class="geometry-display">
-                        <svg id="geometrySvg" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
-                            <!-- 図形がここに描画されます -->
-                        </svg>
-                    </div>
-
-                    <div class="problem-description">
-                        <h3>条件</h3>
-                        <ul id="conditions" class="conditions-list">
-                            <!-- 条件がここに表示されます -->
-                        </ul>
-
-                        <h3>証明せよ</h3>
-                        <p id="goalStatement" class="goal-statement">
-                            <!-- 証明する内容がここに表示されます -->
-                        </p>
+        <main id="tutorialMode">
+            <section class="tutorial-intro">
+                <h2>図形の証明について</h2>
+                <div class="intro-content">
+                    <p>図形の証明とは、図形の性質を使って、ある事柄が正しいことを論理的に説明することです。</p>
+                    <p>中学2年生では、主に<strong>三角形の合同</strong>を証明することを学びます。</p>
+                    <div class="key-concept">
+                        <h3>💡 合同とは？</h3>
+                        <p>2つの図形が、形も大きさも全く同じとき、これらの図形は<strong>合同</strong>であるといいます。</p>
+                        <p>記号：△ABC ≡ △DEF （≡は合同を表す記号）</p>
                     </div>
                 </div>
             </section>
 
-            <section class="proof-section">
-                <h2>証明</h2>
-                <div id="proofSteps" class="proof-steps">
-                    <!-- 証明のステップがここに追加されます -->
+            <section class="tutorial-section">
+                <h2>1️⃣ 三角形の合同条件</h2>
+                <p class="section-intro">2つの三角形が合同であることを証明するには、以下の3つの条件のいずれかを示せばよい。</p>
+
+                <div class="proof-method">
+                    <h3>① 3組の辺がそれぞれ等しい（SSS合同）</h3>
+                    <div class="method-content">
+                        <div class="method-explanation">
+                            <p><strong>Side-Side-Side の略で SSS</strong></p>
+                            <p>△ABCと△DEFにおいて</p>
+                            <ul>
+                                <li>AB = DE</li>
+                                <li>BC = EF</li>
+                                <li>CA = FD</li>
+                            </ul>
+                            <p>この3つが成り立つとき、<br><strong>△ABC ≡ △DEF</strong></p>
+                            <div class="tip-box">
+                                <strong>覚え方：</strong>3つの辺の長さが全部同じなら、形も大きさも同じ！
+                            </div>
+                        </div>
+                        <div class="method-diagram">
+                            <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="50,200 150,50 200,200" fill="none" stroke="#4facfe" stroke-width="3"/>
+                                <polygon points="250,200 350,50 400,200" fill="none" stroke="#4facfe" stroke-width="3"/>
+                                <text x="40" y="215" class="svg-label">A</text>
+                                <text x="150" y="40" class="svg-label">B</text>
+                                <text x="205" y="215" class="svg-label">C</text>
+                                <text x="240" y="215" class="svg-label">D</text>
+                                <text x="350" y="40" class="svg-label">E</text>
+                                <text x="405" y="215" class="svg-label">F</text>
+                                <!-- Equal marks -->
+                                <line x1="95" y1="120" x2="105" y2="130" stroke="#28a745" stroke-width="3"/>
+                                <line x1="295" y1="120" x2="305" y2="130" stroke="#28a745" stroke-width="3"/>
+                                <line x1="170" y1="120" x2="180" y2="130" stroke="#28a745" stroke-width="3"/>
+                                <line x1="170" y1="126" x2="180" y2="136" stroke="#28a745" stroke-width="3"/>
+                                <line x1="370" y1="120" x2="380" y2="130" stroke="#28a745" stroke-width="3"/>
+                                <line x1="370" y1="126" x2="380" y2="136" stroke="#28a745" stroke-width="3"/>
+                                <line x1="120" y1="200" x2="130" y2="200" stroke="#28a745" stroke-width="3"/>
+                                <line x1="120" y1="206" x2="130" y2="206" stroke="#28a745" stroke-width="3"/>
+                                <line x1="120" y1="212" x2="130" y2="212" stroke="#28a745" stroke-width="3"/>
+                                <line x1="320" y1="200" x2="330" y2="200" stroke="#28a745" stroke-width="3"/>
+                                <line x1="320" y1="206" x2="330" y2="206" stroke="#28a745" stroke-width="3"/>
+                                <line x1="320" y1="212" x2="330" y2="212" stroke="#28a745" stroke-width="3"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="add-step-section">
-                    <select id="reasonType" class="form-select">
-                        <option value="">理由を選択...</option>
-                        <option value="given">仮定より</option>
-                        <option value="vertical">対頂角は等しい</option>
-                        <option value="common">共通な辺</option>
-                        <option value="parallel">平行線の錯角は等しい</option>
-                        <option value="parallel-alt">平行線の同位角は等しい</option>
-                        <option value="isosceles">二等辺三角形の底角は等しい</option>
-                        <option value="congruent-sas">2辺とその間の角が等しい（SAS）</option>
-                        <option value="congruent-asa">1辺とその両端の角が等しい（ASA）</option>
-                        <option value="congruent-sss">3辺が等しい（SSS）</option>
-                        <option value="cpctc">合同な図形の対応する辺（角）は等しい</option>
-                    </select>
-
-                    <input type="text" id="stepContent" class="form-input" placeholder="例: AB = CD">
-
-                    <button id="addStepBtn" class="btn btn-secondary">ステップを追加</button>
+                <div class="proof-method">
+                    <h3>② 2組の辺とその間の角がそれぞれ等しい（SAS合同）</h3>
+                    <div class="method-content">
+                        <div class="method-explanation">
+                            <p><strong>Side-Angle-Side の略で SAS</strong></p>
+                            <p>△ABCと△DEFにおいて</p>
+                            <ul>
+                                <li>AB = DE</li>
+                                <li><strong>∠ABC</strong> = ∠DEF （間の角）</li>
+                                <li>BC = EF</li>
+                            </ul>
+                            <p>この3つが成り立つとき、<br><strong>△ABC ≡ △DEF</strong></p>
+                            <div class="tip-box">
+                                <strong>ポイント：</strong>角は2つの辺に<strong>はさまれた角</strong>でなければダメ！
+                            </div>
+                        </div>
+                        <div class="method-diagram">
+                            <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="50,200 150,50 200,200" fill="none" stroke="#4facfe" stroke-width="3"/>
+                                <polygon points="250,200 350,50 400,200" fill="none" stroke="#4facfe" stroke-width="3"/>
+                                <path d="M 140,70 A 20 20 0 0 1 160,90" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <path d="M 340,70 A 20 20 0 0 1 360,90" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <text x="40" y="215" class="svg-label">A</text>
+                                <text x="150" y="40" class="svg-label">B</text>
+                                <text x="205" y="215" class="svg-label">C</text>
+                                <text x="240" y="215" class="svg-label">D</text>
+                                <text x="350" y="40" class="svg-label">E</text>
+                                <text x="405" y="215" class="svg-label">F</text>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="proof-actions">
-                    <button id="checkAnswerBtn" class="btn btn-success">答え合わせ</button>
-                    <button id="showHintBtn" class="btn btn-info">ヒント</button>
-                    <button id="showAnswerBtn" class="btn btn-warning">解答を表示</button>
-                    <button id="clearProofBtn" class="btn btn-danger">クリア</button>
-                </div>
-
-                <div id="feedback" class="feedback hidden">
-                    <!-- フィードバックがここに表示されます -->
+                <div class="proof-method">
+                    <h3>③ 1組の辺とその両端の角がそれぞれ等しい（ASA合同）</h3>
+                    <div class="method-content">
+                        <div class="method-explanation">
+                            <p><strong>Angle-Side-Angle の略で ASA</strong></p>
+                            <p>△ABCと△DEFにおいて</p>
+                            <ul>
+                                <li><strong>∠ABC</strong> = ∠DEF</li>
+                                <li>BC = EF （間の辺）</li>
+                                <li><strong>∠BCA</strong> = ∠EFD</li>
+                            </ul>
+                            <p>この3つが成り立つとき、<br><strong>△ABC ≡ △DEF</strong></p>
+                            <div class="tip-box">
+                                <strong>ポイント：</strong>辺は2つの角に<strong>はさまれた辺</strong>でなければダメ！
+                            </div>
+                        </div>
+                        <div class="method-diagram">
+                            <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="50,200 150,50 200,200" fill="none" stroke="#4facfe" stroke-width="3"/>
+                                <polygon points="250,200 350,50 400,200" fill="none" stroke="#4facfe" stroke-width="3"/>
+                                <path d="M 140,70 A 20 20 0 0 1 160,90" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <path d="M 340,70 A 20 20 0 0 1 360,90" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <path d="M 180,190 A 20 20 0 0 1 190,170" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <path d="M 380,190 A 20 20 0 0 1 390,170" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <text x="40" y="215" class="svg-label">A</text>
+                                <text x="150" y="40" class="svg-label">B</text>
+                                <text x="205" y="215" class="svg-label">C</text>
+                                <text x="240" y="215" class="svg-label">D</text>
+                                <text x="350" y="40" class="svg-label">E</text>
+                                <text x="405" y="215" class="svg-label">F</text>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section class="answer-section hidden" id="answerSection">
-                <h2>模範解答</h2>
-                <div id="modelAnswer" class="model-answer">
-                    <!-- 模範解答がここに表示されます -->
+            <section class="tutorial-section">
+                <h2>2️⃣ よく使う図形の性質</h2>
+
+                <div class="property-box">
+                    <h3>対頂角は等しい</h3>
+                    <div class="property-content">
+                        <div class="property-text">
+                            <p>2本の直線が交わるとき、向かい合う角（対頂角）は等しい。</p>
+                            <p>例：∠AOC = ∠BOD</p>
+                        </div>
+                        <div class="property-diagram">
+                            <svg viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="20" y1="100" x2="230" y2="100" stroke="#333" stroke-width="2"/>
+                                <line x1="125" y1="20" x2="125" y2="180" stroke="#333" stroke-width="2"/>
+                                <text x="10" y="105" class="svg-label">A</text>
+                                <text x="235" y="105" class="svg-label">B</text>
+                                <text x="130" y="15" class="svg-label">C</text>
+                                <text x="130" y="195" class="svg-label">D</text>
+                                <text x="105" y="105" class="svg-label">O</text>
+                                <path d="M 105,100 A 20 20 0 0 0 125,80" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <path d="M 145,100 A 20 20 0 0 1 125,120" stroke="#ffc107" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-box">
+                    <h3>平行線の錯角・同位角</h3>
+                    <div class="property-content">
+                        <div class="property-text">
+                            <p><strong>錯角：</strong>2本の平行線を1本の直線が横切るとき、Z型の位置にある角は等しい。</p>
+                            <p><strong>同位角：</strong>F型の位置にある角は等しい。</p>
+                        </div>
+                        <div class="property-diagram">
+                            <svg viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="20" y1="60" x2="230" y2="60" stroke="#333" stroke-width="2"/>
+                                <line x1="20" y1="140" x2="230" y2="140" stroke="#333" stroke-width="2"/>
+                                <line x1="80" y1="20" x2="170" y2="180" stroke="#dc3545" stroke-width="2"/>
+                                <text x="125" y="50" fill="#666" font-size="14">// 平行</text>
+                                <path d="M 110,70 A 15 15 0 0 0 120,85" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <path d="M 140,115 A 15 15 0 0 0 150,130" stroke="#ffc107" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-box">
+                    <h3>二等辺三角形の性質</h3>
+                    <div class="property-content">
+                        <div class="property-text">
+                            <p>2つの辺が等しい三角形を<strong>二等辺三角形</strong>という。</p>
+                            <p><strong>性質：</strong>二等辺三角形の底角（2つの等しい辺に挟まれていない角）は等しい。</p>
+                            <p>AB = AC ならば ∠B = ∠C</p>
+                        </div>
+                        <div class="property-diagram">
+                            <svg viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="125,40 50,170 200,170" fill="none" stroke="#4facfe" stroke-width="3"/>
+                                <line x1="70" y1="95" x2="80" y2="105" stroke="#28a745" stroke-width="3"/>
+                                <line x1="170" y1="105" x2="180" y2="95" stroke="#28a745" stroke-width="3"/>
+                                <path d="M 60,160 A 15 15 0 0 1 70,145" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <path d="M 190,145 A 15 15 0 0 1 200,160" stroke="#ffc107" stroke-width="2" fill="none"/>
+                                <text x="125" y="25" class="svg-label">A</text>
+                                <text x="35" y="180" class="svg-label">B</text>
+                                <text x="205" y="180" class="svg-label">C</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-box">
+                    <h3>共通な辺</h3>
+                    <div class="property-content">
+                        <div class="property-text">
+                            <p>2つの三角形に共通する辺は、もちろん等しい。</p>
+                            <p>証明でよく使う重要なテクニック！</p>
+                            <p>例：△ABDと△ACDにおいて、AD = AD（共通）</p>
+                        </div>
+                    </div>
                 </div>
             </section>
+
+            <section class="tutorial-section">
+                <h2>3️⃣ 証明の書き方</h2>
+                <div class="writing-guide">
+                    <h3>証明の基本的な流れ</h3>
+                    <ol class="proof-steps-guide">
+                        <li>
+                            <strong>仮定を書く</strong>
+                            <p>問題文で与えられている条件を確認する</p>
+                            <div class="example">例：「AB = CD」（仮定より）</div>
+                        </li>
+                        <li>
+                            <strong>図形の性質を使う</strong>
+                            <p>対頂角、平行線、二等辺三角形などの性質を利用する</p>
+                            <div class="example">例：「∠A = ∠B」（対頂角は等しい）</div>
+                        </li>
+                        <li>
+                            <strong>合同条件を確認</strong>
+                            <p>SSS、SAS、ASA のいずれかが成り立つか確認する</p>
+                            <div class="example">例：上の①②③より、2辺とその間の角が等しいから（SAS）</div>
+                        </li>
+                        <li>
+                            <strong>結論を書く</strong>
+                            <p>証明したい事柄を書く</p>
+                            <div class="example">例：「△ABC ≡ △DEF」</div>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="example-proof">
+                    <h3>📝 証明の例</h3>
+                    <div class="example-problem">
+                        <h4>問題</h4>
+                        <p>△ABCで、AB = ACとする。辺BCの中点をDとするとき、△ABD ≡ △ACD を証明せよ。</p>
+                    </div>
+                    <div class="example-solution">
+                        <h4>証明</h4>
+                        <div class="proof-step-example">
+                            <span class="step-number">①</span>
+                            <span class="step-content">AB = AC</span>
+                            <span class="step-reason">（仮定より）</span>
+                        </div>
+                        <div class="proof-step-example">
+                            <span class="step-number">②</span>
+                            <span class="step-content">BD = CD</span>
+                            <span class="step-reason">（Dは辺BCの中点より）</span>
+                        </div>
+                        <div class="proof-step-example">
+                            <span class="step-number">③</span>
+                            <span class="step-content">AD = AD</span>
+                            <span class="step-reason">（共通な辺）</span>
+                        </div>
+                        <div class="proof-step-example">
+                            <span class="step-number">④</span>
+                            <span class="step-content">△ABD ≡ △ACD</span>
+                            <span class="step-reason">（①②③より、3辺が等しいから SSS）</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tutorial-section">
+                <h2>4️⃣ 証明のコツ</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h3>💡 図をよく見る</h3>
+                        <p>等しい辺や角、平行線などの印をしっかり確認しよう</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>💡 仮定を整理</h3>
+                        <p>与えられた条件を箇条書きにして整理すると分かりやすい</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>💡 ゴールを確認</h3>
+                        <p>何を証明すればいいのか、最初に確認しよう</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>💡 3つを探す</h3>
+                        <p>合同条件は3つの要素が必要。「あと何が必要？」と考えよう</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>💡 共通な辺・角</h3>
+                        <p>見落としがち！2つの図形に共通する部分を探そう</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>💡 理由を明確に</h3>
+                        <p>なぜそうなるのか、必ず理由をつけよう</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="start-practice">
+                <button id="startPracticeBtn" class="btn btn-primary btn-large">
+                    ✏️ 練習モードで問題を解いてみよう！
+                </button>
+            </div>
         </main>
+
+        <main id="practiceMode" class="hidden">
+                <section class="problem-section">
+                    <div class="problem-header">
+                        <h2>問題</h2>
+                        <button id="newProblemBtn" class="btn btn-primary">新しい問題を生成</button>
+                    </div>
+
+                    <div class="problem-content">
+                        <div class="geometry-display">
+                            <svg id="geometrySvg" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 図形がここに描画されます -->
+                            </svg>
+                        </div>
+
+                        <div class="problem-description">
+                            <h3>条件</h3>
+                            <ul id="conditions" class="conditions-list">
+                                <!-- 条件がここに表示されます -->
+                            </ul>
+
+                            <h3>証明せよ</h3>
+                            <p id="goalStatement" class="goal-statement">
+                                <!-- 証明する内容がここに表示されます -->
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="proof-section">
+                    <h2>証明</h2>
+                    <div id="proofSteps" class="proof-steps">
+                        <!-- 証明のステップがここに追加されます -->
+                    </div>
+
+                    <div class="add-step-section">
+                        <select id="reasonType" class="form-select">
+                            <option value="">理由を選択...</option>
+                            <option value="given">仮定より</option>
+                            <option value="vertical">対頂角は等しい</option>
+                            <option value="common">共通な辺</option>
+                            <option value="parallel">平行線の錯角は等しい</option>
+                            <option value="parallel-alt">平行線の同位角は等しい</option>
+                            <option value="isosceles">二等辺三角形の底角は等しい</option>
+                            <option value="congruent-sas">2辺とその間の角が等しい（SAS）</option>
+                            <option value="congruent-asa">1辺とその両端の角が等しい（ASA）</option>
+                            <option value="congruent-sss">3辺が等しい（SSS）</option>
+                            <option value="cpctc">合同な図形の対応する辺（角）は等しい</option>
+                        </select>
+
+                        <input type="text" id="stepContent" class="form-input" placeholder="例: AB = CD">
+
+                        <button id="addStepBtn" class="btn btn-secondary">ステップを追加</button>
+                    </div>
+
+                    <div class="proof-actions">
+                        <button id="checkAnswerBtn" class="btn btn-success">答え合わせ</button>
+                        <button id="showHintBtn" class="btn btn-info">ヒント</button>
+                        <button id="showAnswerBtn" class="btn btn-warning">解答を表示</button>
+                        <button id="clearProofBtn" class="btn btn-danger">クリア</button>
+                    </div>
+
+                    <div id="feedback" class="feedback hidden">
+                        <!-- フィードバックがここに表示されます -->
+                    </div>
+                </section>
+
+                <section class="answer-section hidden" id="answerSection">
+                    <h2>模範解答</h2>
+                    <div id="modelAnswer" class="model-answer">
+                        <!-- 模範解答がここに表示されます -->
+                    </div>
+                </section>
+            </main>
 
         <footer>
             <p>図形の証明を練習しよう！問題はランダムに生成されます。</p>

@@ -9,10 +9,16 @@ class GeometryProofApp {
 
     init() {
         this.setupEventListeners();
-        this.generateNewProblem();
+        this.showTutorialMode(); // 最初は解説モードを表示
     }
 
     setupEventListeners() {
+        // モード切り替え
+        document.getElementById('tutorialModeBtn').addEventListener('click', () => this.showTutorialMode());
+        document.getElementById('practiceModeBtn').addEventListener('click', () => this.showPracticeMode());
+        document.getElementById('startPracticeBtn').addEventListener('click', () => this.showPracticeMode());
+
+        // 練習モードのイベントリスナー
         document.getElementById('newProblemBtn').addEventListener('click', () => this.generateNewProblem());
         document.getElementById('addStepBtn').addEventListener('click', () => this.addProofStep());
         document.getElementById('checkAnswerBtn').addEventListener('click', () => this.checkAnswer());
@@ -26,6 +32,25 @@ class GeometryProofApp {
                 this.addProofStep();
             }
         });
+    }
+
+    showTutorialMode() {
+        document.getElementById('tutorialMode').classList.remove('hidden');
+        document.getElementById('practiceMode').classList.add('hidden');
+        document.getElementById('tutorialModeBtn').classList.add('active');
+        document.getElementById('practiceModeBtn').classList.remove('active');
+    }
+
+    showPracticeMode() {
+        document.getElementById('tutorialMode').classList.add('hidden');
+        document.getElementById('practiceMode').classList.remove('hidden');
+        document.getElementById('tutorialModeBtn').classList.remove('active');
+        document.getElementById('practiceModeBtn').classList.add('active');
+
+        // 練習モードに切り替えた時に問題を生成
+        if (!this.currentProblem) {
+            this.generateNewProblem();
+        }
     }
 
     generateNewProblem() {
